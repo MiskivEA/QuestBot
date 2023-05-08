@@ -12,10 +12,6 @@ SERVICE_URL_API = 'http://jservice.io/'
 
 bot = Bot(token=API_KEY)
 updater = Updater(token=API_KEY)
-chat_id = 303016224
-info = 'Bot is activated. Use /start'
-
-bot.send_message(chat_id=chat_id, text=f'{info}')
 
 Q_Answer = {}
 
