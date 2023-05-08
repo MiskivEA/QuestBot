@@ -8,7 +8,6 @@ from service import get_new_question_and_answer
 
 load_dotenv()
 API_KEY = os.getenv('api_key')
-SERVICE_URL_API = 'http://jservice.io/'
 
 bot = Bot(token=API_KEY)
 updater = Updater(token=API_KEY)

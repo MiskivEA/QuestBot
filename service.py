@@ -1,6 +1,12 @@
-import requests
+import os
 
-SERVICE_ENDPOINT = 'http://jservice.io/api/random'
+import requests
+from dotenv import load_dotenv
+
+
+load_dotenv()
+
+SERVICE_ENDPOINT = os.getenv('SERVICE_ENDPOINT')
 
 
 def get_new_question_and_answer():
