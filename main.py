@@ -44,9 +44,8 @@ def check_answer(update, context):
                                       '/new_question')
 
 
-updater.dispatcher.add_handler(CommandHandler('new_question', send_question))
-updater.dispatcher.add_handler(CommandHandler('start', start))
-updater.dispatcher.add_handler(MessageHandler(Filters.text, check_answer))
-
-
-updater.start_polling()
+if __name__ == '__main__':
+    updater.dispatcher.add_handler(CommandHandler('new_question', send_question))
+    updater.dispatcher.add_handler(CommandHandler('start', start))
+    updater.dispatcher.add_handler(MessageHandler(Filters.text, check_answer))
+    updater.start_polling()
