@@ -19,29 +19,32 @@ def start(update, context):
     chat = update.effective_chat
     context.bot.send_message(chat_id=chat.id,
                              text='Hello, could you play the game? '
-                                  'Send for the start /new_question')
+                                  'Send for the start \n/new_question')
 
 
 def send_question(update, context):
     chat = update.effective_chat
     question, answer = get_new_question_and_answer()
-    Q_Answer.clear()
-    Q_Answer['question'] = question
-    Q_Answer['answer'] = answer
+    Q_Answer[chat.id] = [question, answer]
     context.bot.send_message(chat_id=chat.id,
                              text=f'Question: {question}\n\n'
                                   f'Answer: {answer}')
 
 
 def check_answer(update, context):
+    chat = update.effective_chat
     text = update.message.text
-    if text.lower() == Q_Answer['answer'].lower():
-        context.bot.send_message(chat_id=update.effective_chat.id,
-                                 text='Correct!!! \n /new_question')
-    else:
-        context.bot.send_message(chat_id=update.effective_chat.id,
-                                 text='Sorry, is`s not correct, next try or \n'
-                                      '/new_question')
+    try:
+        if text.lower() == Q_Answer[chat.id][1].lower():
+            context.bot.send_message(chat_id=chat.id,
+                                     text='Correct!!! \n /new_question')
+        else:
+            context.bot.send_message(chat_id=chat.id,
+                                     text='Sorry, is`s not correct, next try or \n'
+                                          '/new_question')
+    except KeyError:
+        context.bot.send_message(chat_id=chat.id,
+                                 text='Use /start to get started')
 
 
 if __name__ == '__main__':
